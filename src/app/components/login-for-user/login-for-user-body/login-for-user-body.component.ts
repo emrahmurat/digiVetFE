@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { UserDetailsRequestModel } from 'src/app/dto/user-details-request';
 import { userLoginDto } from 'src/app/dto/user-login-dto';
 import { UserLoginService } from 'src/app/services/user-login-service/user-login.service';
-
+interface AppState{
+  message: string;
+}
 @Component({
   selector: 'app-login-for-user-body',
   templateUrl: './login-for-user-body.component.html',
@@ -12,7 +17,9 @@ import { UserLoginService } from 'src/app/services/user-login-service/user-login
 
 export class LoginForUserBodyComponent implements OnInit {
 
-  constructor(private userLoginService:UserLoginService) { }
+  message$ :Observable<String>;
+  constructor(private userLoginService:UserLoginService,private store: Store<AppState>)
+   { }
   ngOnInit(): void {
 
   }
@@ -23,11 +30,24 @@ export class LoginForUserBodyComponent implements OnInit {
   loginDto: userLoginDto;
   userDetailsDto : UserDetailsRequestModel;
 
+  state: any;
   loginClick(email:any,password:any): any{
 
     this.loginDto = new userLoginDto()
     this.loginDto.ctor(email,password)
-    return this.userLoginService.getLogin(this.loginDto).subscribe(data => {this.loginDto = data;console.log(data)}  );
+    this.store.dispatch({type: email})
+this.state = this.userLoginService.getLogin(this.loginDto).subscribe(data => {this.loginDto = data;console.log(data)}  );
+if(this.state == true){
+
+
+  return true
+
+}else{
+
+  return false
+}
+
+
   }
 
   saveClick(firstName: any,
@@ -40,6 +60,10 @@ export class LoginForUserBodyComponent implements OnInit {
       alert("kaydınız başarı ile oluşturulmuştur..")
       this.userDetailsDto = new UserDetailsRequestModel(firstName,lastName,email,password,city,country,adress)
       return this.userLoginService.getCreate(this.userDetailsDto).subscribe(data =>{this.userDetailsDto = data})
+    }
+    alertError()
+    {
+      alert('kullanıcı adınız veya şifre yanlıştır lütfen tekrar deneyiniz')
     }
 
 }

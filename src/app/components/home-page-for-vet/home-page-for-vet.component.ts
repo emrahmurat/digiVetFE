@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { VetLoginDto } from 'src/app/dto/vet-login-dto';
 import { LoginForUserBodyComponent } from '../login-for-user/login-for-user-body/login-for-user-body.component';
 import { LoginForVetComponent } from '../login-for-vet/login-for-vet.component';
 
+interface AppState{
+  message: string;
+}
 @Component({
   selector: 'app-home-page-for-vet',
   templateUrl: './home-page-for-vet.component.html',
@@ -10,7 +15,9 @@ import { LoginForVetComponent } from '../login-for-vet/login-for-vet.component';
 })
 export class HomePageForVetComponent implements OnInit {
 
-  constructor() { }
+  message$ :Observable<String>;
+  constructor(private store: Store<AppState>)
+  { this.message$ = this.store.select('message')}
 
   vetLoginDto: VetLoginDto
 
@@ -19,6 +26,7 @@ export class HomePageForVetComponent implements OnInit {
   }
   alertMessage(){
     this.vetLoginDto = new VetLoginDto()
+
 
     console.log()
   }

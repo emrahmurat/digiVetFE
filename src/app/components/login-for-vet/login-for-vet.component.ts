@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { VetDetailsRequest } from 'src/app/dto/vet-details-request';
 import { VetLoginDto } from 'src/app/dto/vet-login-dto';
 import { VetLoginService } from 'src/app/services/vet-login-service/vet-login.service';
-
+interface AppState{
+  message: string;
+}
 @Component({
   selector: 'app-login-for-vet',
   templateUrl: './login-for-vet.component.html',
@@ -12,7 +16,8 @@ import { VetLoginService } from 'src/app/services/vet-login-service/vet-login.se
 })
 export class LoginForVetComponent implements OnInit {
 
-  constructor(private vetLoginService:VetLoginService) { }
+  message$ :Observable<String>;
+  constructor(private vetLoginService:VetLoginService,private store: Store<AppState>) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +29,7 @@ export class LoginForVetComponent implements OnInit {
     this.vetLoginDto = new VetLoginDto()
     this.vetLoginDto.ctor(email,password)
 
+    this.store.dispatch({type: email})
     return this.vetLoginService.getLogin(this.vetLoginDto).subscribe(data =>{this.vetLoginDto = data;console.log(data)})
   }
 

@@ -10,6 +10,8 @@ import { HomePageForVetComponent } from './components/home-page-for-vet/home-pag
 import { HomePageForUserComponent } from './components/home-page-for-user/home-page-for-user.component';
 import { LoginForUserBodyComponent } from './components/login-for-user/login-for-user-body/login-for-user-body.component';
 import { HttpClientModule } from '@angular/common/http';
+import { simpleReducer } from './SimpleReducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    StoreModule.forRoot({ message: simpleReducer })
 
   ],
   providers: [],

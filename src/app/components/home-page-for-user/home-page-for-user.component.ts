@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+interface AppState{
+  message: string;
+}
 @Component({
   selector: 'app-home-page-for-user',
   templateUrl: './home-page-for-user.component.html',
@@ -7,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePageForUserComponent implements OnInit {
 
-  constructor() { }
+  message$ :Observable<String>;
+  constructor(private store: Store<AppState>)
+  {this.message$ = this.store.select('message') }
 
   ngOnInit(): void {
   }
