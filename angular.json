@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "0c6531e9-e882-4586-a055-25639126fbfe"
+    "analytics": false
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "digivetFe": {
+    "DigiVetFE": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/digivet-fe",
+            "outputPath": "dist/digi-vet-fe",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,6 +30,8 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -71,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "digivetFe:build:production"
+              "browserTarget": "DigiVetFE:build:production"
             },
             "development": {
-              "browserTarget": "digivetFe:build:development"
+              "browserTarget": "DigiVetFE:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "digivetFe:build"
+            "browserTarget": "DigiVetFE:build"
           }
         },
         "test": {
@@ -97,13 +99,18 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts":
+             [
+            "node_modules/jquery/dist/jquery.min.js",
+            "node_modules/materialize-css/dist/js/materialize.min.js"
+          ]
           }
         }
       }
     }
   },
-  "defaultProject": "digivetFe"
+  "defaultProject": "DigiVetFE"
 }
