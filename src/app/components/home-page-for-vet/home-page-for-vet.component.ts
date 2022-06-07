@@ -16,6 +16,7 @@ interface AppState{
 export class HomePageForVetComponent implements OnInit {
 
   message$ :Observable<String>;
+  // alerts: Alert [] = []
   constructor(private store: Store<AppState>)
   { this.message$ = this.store.select('message')}
 

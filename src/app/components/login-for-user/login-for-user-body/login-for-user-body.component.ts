@@ -18,7 +18,7 @@ interface AppState{
 export class LoginForUserBodyComponent implements OnInit {
 
   message$ :Observable<String>;
-  constructor(private userLoginService:UserLoginService,private store: Store<AppState>)
+  constructor(private userLoginService:UserLoginService,private store: Store<AppState>,private router: Router)
    { }
   ngOnInit(): void {
 
@@ -36,16 +36,15 @@ export class LoginForUserBodyComponent implements OnInit {
     this.loginDto = new userLoginDto()
     this.loginDto.ctor(email,password)
     this.store.dispatch({type: email})
-this.state = this.userLoginService.getLogin(this.loginDto).subscribe(data => {this.loginDto = data;console.log(data)}  );
-if(this.state == true){
-
-
-  return true
-
+   this.userLoginService.getLogin(this.loginDto).subscribe(data => {this.state = data;
+if(!this.state){
+  alert("Kullanıcı Adı veya Şifre yanlıştır Lütfen tekrar deneyiniz...")
 }else{
+  this.router.navigateByUrl('/user-home-page')
 
-  return false
 }
+}  );
+
 
 
   }

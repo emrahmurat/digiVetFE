@@ -17,7 +17,7 @@
               </div>
 
               <div class="group">
-                  <input type="submit" class="button" value="Giriş"  [routerLink]="['../vet-home-page/vet-meeting']" (click) = "loginClick(email.value,sifre.value)">
+                  <input type="submit" class="button" value="Giriş"   (click) = "loginClick(email.value,sifre.value)">
               </div>
               <div class="hr"></div>
               <div class="foot-lnk">
@@ -63,7 +63,7 @@
           </div>
 
               <div class="group">
-                  <input type="submit" class="button"  routerLinkActive="router-link-active" (click) = "submitClick(firstName.value,lastName.value,emailSignUp.value,passwordSignUp.value,city.value,country.value,branch.value,hospital.value,adress.value)"  >
+                  <input type="submit" class="button"(click) = "submitClick(firstName.value,lastName.value,emailSignUp.value,passwordSignUp.value,city.value,country.value,branch.value,hospital.value,adress.value)"  >
               </div>
               <div class="hr"></div>
               <div class="foot-lnk">
